@@ -1,4 +1,4 @@
-#include "Port_SetPinPullUp"
+#include "port.h"
 void Port_SetPinPullUp(uint8 port_index,uint8 pins_mask,uint8 enable){
 	switch(port_index){
 		case 0://case port A
@@ -29,7 +29,7 @@ void Port_SetPinPullUp(uint8 port_index,uint8 pins_mask,uint8 enable){
 	
 	case 3://case portD
 			
-			Port_reg=GPIO_PORTD_PUR_R;
+//			Port_reg=GPIO_PORTD_PUR_R;
 			if(enable){
 	GPIO_PORTD_PUR_R |= pins_mask;
 	}
@@ -38,7 +38,7 @@ void Port_SetPinPullUp(uint8 port_index,uint8 pins_mask,uint8 enable){
             }
 		   break;
 	case 4://case portE
-			Port_reg=GPIO_PORTE_PUR_R;
+//			Port_reg=GPIO_PORTE_PUR_R;
 	if(enable){
 	GPIO_PORTE_PUR_R |= pins_mask;
 	}
