@@ -38,4 +38,24 @@ void OneStep(enum direction dir)
 		if(step_no < 0)
 			step_no = 7;
 	}
+void rotate30_CW()
+{
+	int i = 0;
+	while(i<5)
+	{
+		OneStep(CW);
+		delay(45);
+		i++;
+	}
+}
+void rotate30_CCW()
+{
+	int i = 0;
+	while(i<5)
+	{
+		OneStep(CCW);
+		delay(45);
+		i++;
+	}
+}
 }
