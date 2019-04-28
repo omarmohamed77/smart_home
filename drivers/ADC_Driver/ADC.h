@@ -1,14 +1,12 @@
-/*
- * ADC.h
- *
- *  Created on: Apr 25, 2019
- *      Author: Salma
- */
+
 
 #ifndef ADC_H_
 #define ADC_H_
 
 #include "std_types.h"
+#include "tm4c123gh6pm.h"
+#include "Common_Macros.h"
+
 
 void ADC0_Init();
 
