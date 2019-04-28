@@ -1,9 +1,4 @@
-/*
- * ADC.c
- *
- *  Created on: Apr 25, 2019
- *      Author: Salma
- */
+
 #include "ADC.h"
 
 #define ADC0_SS0_PRI 			0x3
