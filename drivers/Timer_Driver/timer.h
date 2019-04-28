@@ -7,4 +7,5 @@
 
 
 void SysTick_Wait(uint32 delay);
+void SysTick_Wait10ms(uint32_t delay);
 
