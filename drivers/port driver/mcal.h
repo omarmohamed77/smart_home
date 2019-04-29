@@ -9,6 +9,6 @@
 #define MCAL_H_
 
 #include "arm_config.h"
-#include "std_types.h"
 #include "common macros.h"
+#include "std_types.h"
 #endif /* MCAL_H_ */
