@@ -7,7 +7,7 @@
 #define ADC0_SS3_PRI (0x0 << 12)
 
 void ADC0_Init(void) {
-    SYSCTL_RCGC0_R |= 0x0000001; // Enable clock for ADC0
+    SYSCTL_RCGC0_R |= 0x00010000; // Enable clock for ADC0
     SYSCTL_RCGCGPIO_R |= 0x10;   // Enable portE
     ADC0_ACTSS_R &= 0x0;         // Disable all the sequences
     // ADC0_RIS_R|= 0x00000000;//No Interrupt used
@@ -22,12 +22,10 @@ void ADC0_Init(void) {
     GPIO_PORTE_AMSEL_R |= 0x04;
 }
 
-uint16 ADC0_Reading() {
-    uint16 data;
+void ADC0_Reading(uint16* data) {
     ADC0_PSSI_R = (0x1 << 3); // begin sampling on SS3
-    while ((ADC0_RIS_R & 0x8) != 0x8)
-        ; // if INT3 is not set"checking if conversion is complete"
-    data = ADC0_SSFIFO3_R & 0xFFF; // Storing the Sampled reading
-    ADC0_ISC_R = 0x8;              // clearing RIS of INT3
-    return data;
+    while ((ADC0_RIS_R & ADC_RIS_INR3) != ADC_RIS_INR3){} // if INT3 is not set"checking if conversion is complete"
+    *data = ADC0_SSFIFO3_R; // Storing the Sampled reading
+    ADC0_ISC_R |= ADC_ISC_IN3;              // clearing RIS of INT3
+    return;
 }

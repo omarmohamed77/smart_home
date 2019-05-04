@@ -9,6 +9,6 @@
 
 void ADC0_Init();
 
-uint16 ADC0_Reading();
+void ADC0_Reading(uint16* data);
 
 #endif /* ADC_H_ */
