@@ -1,7 +1,0 @@
-void Systick_init(void)
-{
-NVIC_ST_CTR_R = 0;
-NVCI_ST_RELOAD_R = OX00FFFFFF;
-NVIC_ST_CURRENT_R = 0 ;
-NVIC_ST_CTRL_R = OX00000005;
-}

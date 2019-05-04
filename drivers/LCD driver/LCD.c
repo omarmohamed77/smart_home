@@ -1,5 +1,5 @@
 #include "LCD.h"
-void LCD_init(uint)
+void LCD_init()
 {
 		LCD_command(CLEAR);
     LCD_command(DISPLAY_ON_CURSOR_OFF);
