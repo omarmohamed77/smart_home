@@ -9,53 +9,54 @@ void OneStep(enum direction dir)
 {
 	switch(step_no)
 	{
-		case 0:		GPIO_PORTD_DATA_R = 0x0E;
+		case 0:		GPIO_PORTD_DATA_R = 0x08;
 							break;
-		case 1:		GPIO_PORTD_DATA_R = 0x0C;
+		case 1:		GPIO_PORTD_DATA_R = 0x04;
 							break;
-		case 2:		GPIO_PORTD_DATA_R = 0x0D;
+		case 2:		GPIO_PORTD_DATA_R = 0x02;
 							break;
-		case 3:		GPIO_PORTD_DATA_R = 0x09;
+		case 3:		GPIO_PORTD_DATA_R = 0x01;
 							break;
-		case 4:		GPIO_PORTD_DATA_R = 0x0B;
-							break;
-		case 5:		GPIO_PORTD_DATA_R = 0x03;
-							break;
-		case 6:		GPIO_PORTD_DATA_R = 0x07;
-							break;
-		case 7:		GPIO_PORTD_DATA_R = 0x06;
-							break;
-		default:	GPIO_PORTD_DATA_R = 0x0F;
-							break;
+		//case 4:		GPIO_PORTD_DATA_R = 0x0B;
+			//				break;
+		//case 5:		GPIO_PORTD_DATA_R = 0x03;
+			//				break;
+		//case 6:		GPIO_PORTD_DATA_R = 0x07;
+			//				break;
+		//case 7:		GPIO_PORTD_DATA_R = 0x06;
+			//				break;
+		//default:	GPIO_PORTD_DATA_R = 0x0F;
+				//			break;
 	}
 	if(dir)
 	{
-		step_no = (step_no + 1)%8; 
+		step_no = (step_no + 1)%4; 
 	}
 	else
 	{
-		step_no = step_no - 1;
-		if(step_no < 0)
-			step_no = 7;
+		if(step_no == 0)
+			step_no = 3;
+		else
+			step_no = step_no - 1;
 	}
-void rotate30_CW()
+}
+void turn30_CC(void)
 {
 	int i = 0;
-	while(i<5)
+	while(i<300)
 	{
 		OneStep(CW);
-		delay(45);
+		delaymilli(100);
 		i++;
 	}
 }
-void rotate30_CCW()
+void turn30_CCW(void)
 {
 	int i = 0;
-	while(i<5)
+	while(i<300)
 	{
 		OneStep(CCW);
-		delay(45);
+		delaymilli(100);
 		i++;
 	}
-}
 }
