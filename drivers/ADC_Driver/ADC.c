@@ -23,7 +23,7 @@ void ADC0_Init(void) {
     // ADC0_RIS_R|= 0x00000000;//No Interrupt used
     ADC0_EMUX_R = (ADC0_EMUX_R & 0x0FFF); // Software Trigger
     // ADC0_SSPRI_R = (ADC0_SS3_PRI | ADC0_SS2_PRI | ADC0_SS1_PRI | ADC0_SS0_PRI); // set priority
-    ADC0_SSMUX3_R |= 0x1;                      // mod: set input from AIN0
+    ADC0_SSMUX3_R |= 0x1;                      // mod: set input from AIN1; PE2
     ADC0_SSCTL3_R |= (0x1 << 2) | (0x1 << 1); // maybe modified for temp sensor
     ADC0_ACTSS_R |= 0x8;                      // Enable Sequence 3
 }
