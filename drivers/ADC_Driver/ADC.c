@@ -7,14 +7,19 @@
 #define ADC0_SS3_PRI (0x0 << 12)
 
 void ADC0_Init(void) {
+    int y;
     SYSCTL_RCGC0_R |= 0x00010000; // Enable clock for ADC0
+    y = 0;
+    y = 0;
     SYSCTL_RCGCGPIO_R |= 0x10;   // Enable portE
-    ADC0_ACTSS_R &= 0x0;         // Disable all the sequences
+    y = 0;
+    y = 0;    
+    ADC0_ACTSS_R &= ~0x8;         // Disable all the sequences
     // ADC0_RIS_R|= 0x00000000;//No Interrupt used
-    ADC0_EMUX_R = (ADC0_EMUX_R & 0x0FFF) | (0x0 << 12); // Processor Trigger
+    ADC0_EMUX_R = (ADC0_EMUX_R & 0x0FFF); // Software Trigger
     ADC0_SSPRI_R = (ADC0_SS3_PRI | ADC0_SS2_PRI | ADC0_SS1_PRI | ADC0_SS0_PRI);
     ADC0_SSMUX3_R = 0x0;                     // 1 Sample
-    ADC0_SSCTL3_R = (0x1 << 2) | (0x1 << 1); // maybe modified for temp sensor
+    ADC0_SSCTL3_R |= (0x1 << 2) | (0x1 << 1); // maybe modified for temp sensor
     ADC0_ACTSS_R |= 0x8;                     // Enable Sequence 3
     GPIO_PORTE_DIR_R &= ~(0x04);             // E2 as input
     GPIO_PORTE_AFSEL_R |= 0x04;              // enable alternate fun on E2
