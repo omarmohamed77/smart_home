@@ -1,8 +1,8 @@
 #ifndef TEMPSENSOR_H_
 #define TEMPSENSOR_H_
 
-#include "../ADC_Driver/ADC.h"
-#include "../port driver/mcal.h"
+#include "ADC.h"
+#include "std_types.h"
 
 #define VREFP 3.3
 #define VREFN 0

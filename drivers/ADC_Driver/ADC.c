@@ -14,7 +14,7 @@ void ADC0_Init(void) {
     SYSCTL_RCGCGPIO_R |= 0x10;   // Enable portE
     y = 0;
     y = 0;    
-    ADC0_ACTSS_R &= ~0x8;         // Disable all the sequences
+    ADC0_ACTSS_R &= ~0x8;         // Disable  the sequences s3
     // ADC0_RIS_R|= 0x00000000;//No Interrupt used
     ADC0_EMUX_R = (ADC0_EMUX_R & 0x0FFF); // Software Trigger
     ADC0_SSPRI_R = (ADC0_SS3_PRI | ADC0_SS2_PRI | ADC0_SS1_PRI | ADC0_SS0_PRI);
@@ -29,8 +29,8 @@ void ADC0_Init(void) {
 
 void ADC0_Reading(uint16* data) {
     ADC0_PSSI_R = (0x1 << 3); // begin sampling on SS3
-    while ((ADC0_RIS_R & ADC_RIS_INR3) != ADC_RIS_INR3){} // if INT3 is not set"checking if conversion is complete"
+    while ((ADC0_RIS_R & ADC_RIS_INR3)==0){} // if INT3 is not set"checking if conversion is complete"
     *data = ADC0_SSFIFO3_R; // Storing the Sampled reading
-    ADC0_ISC_R |= ADC_ISC_IN3;              // clearing RIS of INT3
+    ADC0_ISC_R = ADC_ISC_IN3;              // clearing RIS of INT3
     return;
 }

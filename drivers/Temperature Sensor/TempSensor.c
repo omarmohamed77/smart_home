@@ -2,14 +2,19 @@
 
 uint16 get_temperature()
 {
+	 uint16 adc_reading;
+	 uint16 temp;
+	 uint16 result;
     ADC0_ACTSS_R &= ~0x8; // disable sequencer 3
     Set_Bit(ADC0_SSCTL3_R, ADC_SSCTL3_TS0);
-    uint16 adc_reading;
+
     ADC0_ACTSS_R |= 0x8; // Enable Sequence 3
-    ADC0_ACTSS_R &= ~0x8; // disable sequencer 3
+    //ADC0_ACTSS_R &= ~0x8; // disable sequencer 3
     ADC0_Reading(&adc_reading);
-    //    uint16 temp = 147 - ((uint16)(75 * (VREFP - VREFN) * adc_reading) >> 12);
+	  result= (adc_reading)*3.3/4095;
+	  temp =((2.7-result)*75)-55;
+   // temp = 147 - ((uint16)(75 * (VREFP - VREFN) * adc_reading) >> 12);
     Clear_Bit(ADC0_SSCTL0_R, ADC_SSCTL0_TS0);
     ADC0_ACTSS_R |= 0x8; // Enable Sequence 3
-    return adc_reading;
+    return temp;
 }
