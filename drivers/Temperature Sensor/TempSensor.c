@@ -3,7 +3,7 @@
 uint16 get_temperature() {
     uint16 adc_reading;
     uint16 temp;
-    uint16 result;
+    float32 result;
     ADC0_ACTSS_R &= ~0x8; // disable sequencer 3
     Set_Bit(ADC0_SSCTL3_R, ADC_SSCTL3_TS0);
 
