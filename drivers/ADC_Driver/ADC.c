@@ -6,12 +6,13 @@
 #define ADC0_SS2_PRI (0x1 << 8)
 #define ADC0_SS3_PRI (0x0 << 12)
 
+volatile int y;
+
 void ADC0_Init(void) {
-    volatile int y;
-    SYSCTL_RCGC0_R |= 0x00010000; // Enable clock for ADC0
-    y = 0;
-    y = 0;
+    SYSCTL_RCGCADC_R |= 0x1; // Enable clock for ADC0
     SYSCTL_RCGCGPIO_R |= 0x10; // Enable portE
+    y = 0;
+    y = 0;
     y = 0;
     y = 0;
     GPIO_PORTE_DIR_R &= ~(0x04); // E2 as input
@@ -20,8 +21,7 @@ void ADC0_Init(void) {
     GPIO_PORTE_AMSEL_R |= 0x04;
 
     ADC0_ACTSS_R &= ~0x8; // Disable  the sequences s3
-    // ADC0_RIS_R|= 0x00000000;//No Interrupt used
-    ADC0_EMUX_R = (ADC0_EMUX_R & 0x0FFF); // Software Trigger
+    ADC0_EMUX_R &= ~0xF000; // Software Trigger
     // ADC0_SSPRI_R = (ADC0_SS3_PRI | ADC0_SS2_PRI | ADC0_SS1_PRI |
     // ADC0_SS0_PRI); // set priority
     ADC0_SSMUX3_R |= 0x1; // mod: set input from AIN1; PE2
