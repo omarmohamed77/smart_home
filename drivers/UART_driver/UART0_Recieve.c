@@ -1,7 +1,7 @@
 ///   5/5/2019   ///
 ///    Martina   ///
 
-#include "UART0_Recieve.h"
+#include "UART.h"
 
 uint8 UART0_Recieve (void)
  {
