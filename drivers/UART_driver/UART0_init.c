@@ -5,7 +5,7 @@ void UART0_init(void)
 {
 	//1.Enable PORTA Clock:
 	SYSCTL_RCGCGPIO_R |= SYSCTL_RCGCGPIO_R0 ;
-        while( (SYSCTL_PRGPIO_R & SYSCTL_PRGPIO_R0) == 0);
+    while( (SYSCTL_PRGPIO_R & SYSCTL_PRGPIO_R0) == 0);
 
 	//2.Enable PA0 and PA1 as TX and RX For UART0 in digital mode:
 	GPIO_PORTA_AFSEL_R|= (0x03);
