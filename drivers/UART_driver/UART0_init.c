@@ -14,16 +14,17 @@ void UART0_init(void)
 
 	//3.Enable UART0 Clock
 	SYSCTL_RCGCUART_R |= SYSCTL_RCGCUART_R0;
+    while( (SYSCTL_RCGCUART_R & SYSCTL_RCGCUART_R0) == 0);
 
 	//4.Disable UART0 Firstly:
 	UART0_CTL_R &= ~(UART_CTL_UARTEN);
 
-        //5.UART0 Enable FIFOS and data farme length equal to one word:
-	UART0_LCRH_R = (UART_LCRH_FEN | UART_LCRH_WLEN_8 )   ;
+        //6.Baud Rate Configuration: note(clock rate is 16 MHz)
+	UART0_IBRD_R = 104; // fix(shafik)
+	UART0_FBRD_R = 5;   // fix(shafik)
 
-        //6.Baud Rate Configuration:
-	UART0_IBRD_R = 520;
-	UART0_FBRD_R = 53;
+    //5.UART0 Enable FIFOS and data farme length equal to one word:
+	UART0_LCRH_R = (UART_LCRH_FEN | UART_LCRH_WLEN_8 )   ;
 
 	//7.UART0 Enable, UART0 Transmit Enable and UART0 Receive Enable:
 	UART0_CTL_R |= (UART_CTL_UARTEN | UART_CTL_TXE | UART_CTL_RXE);
