@@ -1,13 +1,13 @@
 #include "UART.h"
 	
 //3.Function to check that there is available data inside Received FIFO 
-bool Data_Available_To_Be_Received(void)
+uint8 Data_Available_To_Be_Received(void)
 {
   if ( UART7_FR_R & UART_FR_RXFE )
-		 return FALSE;
+		 return 0;
 
 	else 
-		return TRUE;
+		return 1;
 }
 
 
