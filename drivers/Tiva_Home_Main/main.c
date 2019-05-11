@@ -6,6 +6,7 @@
 void SystemInit(void){
 	ADC0_init();
 	UART0_init();
+	Systick_init();
 	stepper_init();
 	//PWM_Init(potentiometer_reading);
 }
