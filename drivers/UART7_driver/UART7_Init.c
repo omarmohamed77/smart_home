@@ -27,4 +27,4 @@ void UART7_init(void)
 	UART7_LCRH_R = (UART_LCRH_FEN | UART_LCRH_WLEN_8 )   ;
 
  	//7.UART0 Enable, UART0 Transmit Enable and UART0 Receive Enable:
-	UART7_CTL_R |= (UART_CTL_UARTEN | UART_CTL_TXE | UART_CTL_RXE);
+	UART7_CTL_R |= (UART_CTL_UARTEN | UART_CTL_TXE | UART_CTL_RXE);}
