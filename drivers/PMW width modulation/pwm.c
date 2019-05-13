@@ -1,10 +1,5 @@
-
-#include "PWM.h"
-
-
-
+#include"PWM.h"
 +void PWM_Init(void){
-
  int volatile delay;
 
  SYSCTL_RCC_R  &= ~(SYSCTL_RCC_USEPWMDIV); //use system clock as PWM clock
@@ -19,15 +14,9 @@
 
  PWM0_0_CTL_R   &= ~(1<<0);         //disable pwm block until ready to use
  PWM0_0_CTL_R   &= ~(1<<1);         //set count-down mode
-
- PWM0_0_GENA_R  |=  (0xC2);         //drive pwm low on CmpA and high on zero
- PWM0_0_LOAD_R   =  (1000-1)   ;     //1000 (80khz pwm)
- PWM0_0_CMPA_R   =  (potentiometer_reading);        //set couter value at which CmpA triggers (any value now)
-
  PWM0_0_GENA_R  |=  (0xC2);         //drive pwm low on CmpA and high on zero(low logic)
  PWM0_0_LOAD_R   =  (5000-1)        //5000 (16khz pwm)
  PWM0_0_CMPA_R   =  (2500-1);        //set couter value at which CmpA triggers (any value now)
-
  PWM0_0_CTL_R   |=  (0x01);         //enable pwm block
  PWM0_ENABLE_R  |=  (PWM_ENABLE_PWM0EN);//Enable pwm output to M0PWM0
 }
