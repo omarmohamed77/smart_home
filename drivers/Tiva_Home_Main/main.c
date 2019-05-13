@@ -21,24 +21,24 @@ int main(void){
 	    if(avg!=preavg)
 	    {
 	        if((UART7_FR_R & 0x20)==0){
-	                UART7_DR_R = Out_Data;
-					Prev_temp = Out_Data;
-	                preavg = avg;
+	            UART7_DR_R = Out_Data;
+							Prev_temp = Out_Data;
+	            preavg = avg;
 	        }
 	    }
-		else
-		{
+		//else
+		//{
 			//receive
 			if((UART7_FR_R & 0x10)==0)
 			{
 					In_Data  = (UART7_DR_R & 0xFF);
 					Stepper_Data = In_Data & Stepper_Read;
 					Stepper_Data >>= 6;
-					if(Stepper_Data == 0b01)
+					if(Stepper_Data == 0x01)
 						rotate30_CW();
-					else if(Stepper_Data == 0b10)
+					else if(Stepper_Data == 0x02)
 						rotate30_CCW();
 			}
-		}
+		//}
 	}
 }
