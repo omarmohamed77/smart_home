@@ -3,6 +3,7 @@
 
 #include "mcal.h"
 
-void PWM_Init(uint32 potentiometer_reading);
+void PWM_Init();
+void PWM_Modulation(int potiometer_reading);
 
 #endif
