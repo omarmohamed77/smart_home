@@ -1,4 +1,4 @@
-#include "UART.h"
+#include "UART7.h"
 
  //1.Function to Initiazlize the UART7 Module
 void UART7_init(void)

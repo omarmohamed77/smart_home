@@ -1,4 +1,5 @@
-#include "UART.h"
+#include "UART7.h"
+
 	
 //3.Function to check that there is available data inside Received FIFO 
 uint8 Data_Available_To_Be_Received(void)
