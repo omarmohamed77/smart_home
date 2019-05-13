@@ -26,3 +26,10 @@ void LCD_data(char data)
 	GPIO_PORTA_DATA_R &= (~(ENABLIE_BIT)); // clear Enable bit
 	delay(2);
 }
+void LCD_print(uint16 counter)
+{
+	LCD_command(CLEAR);
+	
+	LCD_data((uint8)(((counter%100) / 10) + 48));
+	LCD_data((uint8)((counter%10) + 48));
+}

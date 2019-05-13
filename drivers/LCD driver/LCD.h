@@ -27,4 +27,6 @@ void LCD_command(char command);
    * @return void
    */
 void LCD_data(char data);
+
+void LCD_print(uint16 counter);
 #endif
