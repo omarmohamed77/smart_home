@@ -45,12 +45,11 @@ void SystemInit(){
 		//	right=0 ;
 	//	ADC0_Reading(&adc);
 		//	led=adc<<6; //maping to 6 bit
-if (! (UART7_FR_R & UART_FR_RXFE) )
+if (! (UART7_FR_R & UART_FR_RXFE) ){
 	  temp=  (UART7_DR_R & 0xFF)	;
-			//temp= UART7_Receive();
-			LCD_data((uint8)((temp / 100) + 48));
-	LCD_data((uint8)(((temp%100) / 10) + 48));
-	LCD_data((uint8)((temp%10) + 48));
+LCD_print(temp);	
+	//temp= UART7_Receive();
+}
 	
 if(left){
 			left=0;
