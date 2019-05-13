@@ -1,0 +1,71 @@
+/*
+ * uartTest.c
+ *
+ *  Created on: May 13, 2019
+ *      Author: omar
+ */
+#include "mcal.h"
+#include "UART7.h"
+#include "port.h"
+#include "DIO.h"
+#include "timer.h"
+
+int main(void)
+{
+    uint8 flag1 = 0, flag2 = 0;
+    uint8 r,l,p;
+    uint16 pot_reading, prev_pot = 0;
+    ADC0_Init();
+    Port_Init(5);
+    Port_SetPinDirection(5, 0x06, PORT_PIN_OUT);
+    Port_SetPinDirection(5, 0x11, PORT_PIN_IN);
+    Port_SetPinPullUp(5, 0x11, 1);
+    Systick_init();
+    UART7_init();
+    uint8 inD;
+    uint8 led = 0;
+    for (;;)
+    {
+        SysTick_Wait10ms(10);
+        ADC0_Reading(&pot_reading);
+        pot_reading = pot_reading >> 7;
+        if (!DIO_ReadPort(5, 0x01) && !flag1)
+        {
+            SysTick_Wait10ms(3);
+            if (!DIO_ReadPort(5, 0x01))
+            {
+                led &= ~0x04;
+                led ^= 0x02;
+                r = 1
+                flag1 = 1;
+            }
+        }
+        if (flag1 && DIO_ReadPort(5, 0x01))
+        {
+            flag1 = 0;
+        }
+        if (!DIO_ReadPort(5, 0x10) && !flag2)
+        {
+            SysTick_Wait10ms(3);
+            if (!DIO_ReadPort(5, 0x10))
+            {
+                led &= ~0x02;
+                led ^= 0x04;
+                l = 1;
+                flag2 = 1;
+            }
+        }
+
+        if (flag2 && DIO_ReadPort(5, 0x10))
+        {
+            flag2 = 0;
+        }
+        if(pot_reading != prev_pot){
+            prev_pot = pot_reading;
+            p = 1;
+        }
+
+        GPIO_PORTF_DATA_BITS_R[0x06] = led;
+    }
+}
+

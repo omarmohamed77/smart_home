@@ -46,7 +46,7 @@ void turn30_CC(void)
 	while(i<300)
 	{
 		OneStep(CW);
-		delaymilli(100);
+		SysTick_Wait10ms(5);
 		i++;
 	}
 }
@@ -56,7 +56,7 @@ void turn30_CCW(void)
 	while(i<300)
 	{
 		OneStep(CCW);
-		delaymilli(100);
+        SysTick_Wait10ms(5);
 		i++;
 	}
 }
