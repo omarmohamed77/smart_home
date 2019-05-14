@@ -1,12 +1,16 @@
+#include "tm4c123gh6pm.h"
 #include "ADC.h"
 #include "UART7.h"
 #include "stepper.h"
 #include "timer.h"
 #include "PWM.h"
 #include "stepper.h"
-
+#include "TempSensor.h"
+void SystemInit(void){
+}
 int main()
 {
+		uint8 temp, indata, pwm = 0;
     ADC0_Init();
     UART7_init();
     Systick_init();
@@ -14,7 +18,6 @@ int main()
     Port_SetPinDirection(1, 0x40, PORT_PIN_IN);
 //    PWM_Init();
     stepper_init();
-    uint8 indata, pwm = 0;
 //    Port_Init(5);
 //    Port_SetPinDirection(5, 0x6, PORT_PIN_OUT);
 
@@ -40,5 +43,10 @@ int main()
             }
 
         }
+	if(!(UART7_FR_R & UART_FR_TXFF))
+	{
+		temp = get_temperature();
+		UART7_DR_R = temp;
+	}
     }
 }
