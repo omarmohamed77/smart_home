@@ -4,7 +4,6 @@ void PWM_Init(void)
 {
     int volatile delay;
 
-    SYSCTL_RCC_R &= ~(SYSCTL_RCC_USEPWMDIV); //use system clock as PWM clock
 
     SYSCTL_RCGC0_R |= (1 << 20);     //activate PWM module 0 clock
     SYSCTL_RCGC2_R |= (1 << 4);      //activate port E clock
@@ -15,6 +14,7 @@ void PWM_Init(void)
     GPIO_PORTE_DEN_R |= (1 << 4);      //enable digital output on PE4
     GPIO_PORTE_AFSEL_R |= (1 << 4);      //activate  Alternate function on PE4
     GPIO_PORTE_PCTL_R |= (0x04000000);      //set alternate peripheral to PWM
+    SYSCTL_RCC_R &= ~(SYSCTL_RCC_USEPWMDIV); //use system clock as PWM clock
     PWM0_2_CTL_R &= ~(1 << 0);         //disable pwm block until ready to use
     PWM0_2_CTL_R &= ~(1 << 1);         //set count-down mode
     PWM0_2_GENA_R |= (0xC2); //drive pwm low on CmpA and high on zero(low logic)
