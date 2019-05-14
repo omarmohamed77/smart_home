@@ -14,7 +14,7 @@
 int main(void)
 {
     uint8 flag1 = 0, flag2 = 0;
-    uint8 r, l, p;
+    uint8 r, l, p, inD;
     uint16 pot_reading, prev_pot = 0;
     ADC0_Init();
     Port_Init(5);
@@ -29,6 +29,10 @@ int main(void)
         SysTick_Wait10ms(10);
         ADC0_Reading(&pot_reading);
         pot_reading = pot_reading >> 7;
+        if (Data_Available_To_Be_Received())
+        {
+            inD = (uint8) (UART7_DR_R & Received_Data_Mask);
+        }
         if (flag1 && DIO_ReadPort(5, 0x01))
         {
             flag1 = 0;
@@ -82,4 +86,3 @@ int main(void)
         GPIO_PORTF_DATA_BITS_R[0x06] = led;
     }
 }
-

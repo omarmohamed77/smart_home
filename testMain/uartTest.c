@@ -1,49 +1,44 @@
-/*
- * uartTest.c
- *
- *  Created on: May 13, 2019
- *      Author: omar
- */
-#include "mcal.h"
+#include "ADC.h"
 #include "UART7.h"
-#include "port.h"
-#include "DIO.h"
+#include "stepper.h"
 #include "timer.h"
+#include "PWM.h"
+#include "stepper.h"
 
-int main(void)
+int main()
 {
-    Port_Init(5);
-    Port_SetPinDirection(5, 0x06, PORT_PIN_OUT);
-    Systick_init();
+    ADC0_Init();
     UART7_init();
-    uint8 inD;
-    uint8 led = 0;
-    for (;;)
+    Systick_init();
+    Port_Init(1);
+    Port_SetPinDirection(1, 0x40, PORT_PIN_IN);
+//    PWM_Init();
+    stepper_init();
+    uint8 indata, pwm = 0;
+//    Port_Init(5);
+//    Port_SetPinDirection(5, 0x6, PORT_PIN_OUT);
+
+    while (1)
     {
-        SysTick_Wait10ms(5);
+        SysTick_Wait10ms(10);
         if (Data_Available_To_Be_Received())
         {
-            inD = UART7_DR_R & 0xFF;
-            if (inD == 't')
+            indata = UART7_DR_R & 0xFF;
+            if (indata == 'l')
             {
-                led ^= 0x02;
-                GPIO_PORTF_DATA_BITS_R[0x06] = led;
-                SysTick_Wait10ms(50);
-                inD = UART7_DR_R & 0xFF;
-                if (inD == 'o')
-                    led ^= 0x04;
+                turn30_CCW();
             }
-            else if (inD == 'o')
+
+            else if (indata == 'r')
             {
-                led ^= 0x04;
-                GPIO_PORTF_DATA_BITS_R[0x06] = led;
-                SysTick_Wait10ms(50);
-                inD = UART7_DR_R & 0xFF;
-                if (inD == 't')
-                    led ^= 0x02;
+                turn30_CC();
             }
+            else if (indata != 'r' && indata != 'l')
+            {
+//                pwm = indata * 2;
+//                PWM_Modulation(pwm);
+            }
+
         }
-        GPIO_PORTF_DATA_BITS_R[0x06] = led;
     }
 }
-
