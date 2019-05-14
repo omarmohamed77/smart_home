@@ -10,10 +10,12 @@
 #include "DIO.h"
 #include "ADC.h"
 #include "timer.h"
-
+#include "LCD.h"
+void SystemInit(void)
+{}
 int main(void)
 {
-    uint8 flag1 = 0, flag2 = 0;
+    uint8 flag1 = 0, flag2 = 0, led = 0;
     uint8 r, l, p, inD;
     uint16 pot_reading, prev_pot = 0;
     ADC0_Init();
@@ -23,7 +25,7 @@ int main(void)
     Port_SetPinPullUp(5, 0x11, 1);
     Systick_init();
     UART7_init();
-    uint8 led = 0;
+		LCD_init();
     for (;;)
     {
         SysTick_Wait10ms(10);
@@ -32,6 +34,7 @@ int main(void)
         if (Data_Available_To_Be_Received())
         {
             inD = (uint8) (UART7_DR_R & Received_Data_Mask);
+		LCD_data(inD);
         }
         if (flag1 && DIO_ReadPort(5, 0x01))
         {
