@@ -1,4 +1,5 @@
 #include "LCD.h"
+#include "timer.h"
 void LCD_init()
 {
 		LCD_command(CLEAR);
@@ -12,9 +13,9 @@ void LCD_command(char command)
 	GPIO_PORTB_DATA_R = command;
 	//Latch
 	GPIO_PORTA_DATA_R |= ENABLIE_BIT; // set Enable bit
-	delay(2);
+	SysTick_Wait(32000);
 	GPIO_PORTA_DATA_R &= (~(ENABLIE_BIT)); // clear Enable bit
-	delay(2);
+	SysTick_Wait(32000);
 }
 void LCD_data(char data)
 {
@@ -22,14 +23,13 @@ void LCD_data(char data)
 	GPIO_PORTB_DATA_R = data;
 	//Latch
 	GPIO_PORTA_DATA_R |= ENABLIE_BIT; // set Enable bit
-	delay(2);
+	SysTick_Wait(32000);
 	GPIO_PORTA_DATA_R &= (~(ENABLIE_BIT)); // clear Enable bit
-	delay(2);
+	SysTick_Wait(32000);
 }
-void LCD_print(uint16 counter)
+void LCD_print(uint16 number)
 {
 	LCD_command(CLEAR);
-	
-	LCD_data((uint8)(((counter%100) / 10) + 48));
-	LCD_data((uint8)((counter%10) + 48));
+	LCD_data((uint8)(((number%100) / 10) + 48));
+	LCD_data((uint8)((number%10) + 48));
 }

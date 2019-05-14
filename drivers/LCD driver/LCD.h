@@ -12,7 +12,6 @@
 #define RS_BIT 0x80 //PA7
 
 #include "mcal.h"
-#include "delay.h"
 
 void LCD_init();
    /**
@@ -28,5 +27,5 @@ void LCD_command(char command);
    */
 void LCD_data(char data);
 
-void LCD_print(uint16 counter);
+void LCD_print(uint16 number);
 #endif
