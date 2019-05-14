@@ -6,11 +6,10 @@
 #include "PWM.h"
 #include "stepper.h"
 #include "TempSensor.h"
-void SystemInit(void){
-}
+
 int main()
 {
-		uint8 temp, indata, pwm = 0;
+    uint8 temp, indata, pwm = 0;
     ADC0_Init();
     UART7_init();
     Systick_init();
@@ -24,17 +23,21 @@ int main()
     while (1)
     {
         SysTick_Wait10ms(10);
+        temp = get_temperature();
+        UART7_Send(temp);
         if (Data_Available_To_Be_Received())
         {
             indata = UART7_DR_R & 0xFF;
             if (indata == 'l')
             {
                 turn30_CCW();
+                UART7_Send('c');
             }
 
             else if (indata == 'r')
             {
                 turn30_CC();
+                UART7_Send('c');
             }
             else if (indata != 'r' && indata != 'l')
             {
@@ -43,10 +46,5 @@ int main()
             }
 
         }
-	if(!(UART7_FR_R & UART_FR_TXFF))
-	{
-		temp = get_temperature();
-		UART7_DR_R = temp;
-	}
     }
 }
