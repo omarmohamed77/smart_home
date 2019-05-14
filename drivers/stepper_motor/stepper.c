@@ -43,7 +43,7 @@ void OneStep(enum direction dir)
 void turn30_CC(void)
 {
 	int i = 0;
-	while(i<300)
+	while(i<170)
 	{
 		OneStep(CW);
 		SysTick_Wait10ms(5);
@@ -53,10 +53,10 @@ void turn30_CC(void)
 void turn30_CCW(void)
 {
 	int i = 0;
-	while(i<300)
+	while(i<170)
 	{
 		OneStep(CCW);
-        SysTick_Wait10ms(5);
+        	SysTick_Wait10ms(5);
 		i++;
 	}
 }
