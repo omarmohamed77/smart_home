@@ -26,16 +26,6 @@ void Port_SetPinDirection(uint8 port_index, uint8 pins_mask,
             GPIO_PORTB_DIR_R &= (~(pins_mask));
         }
         break;
-    case 2: //case portC
-        if (pins_direction)
-        {
-            GPIO_PORTC_DIR_R |= pins_mask;
-        }
-        else
-        {
-            GPIO_PORTC_DIR_R &= (~(pins_mask));
-        }
-        break;
 
     case 3: //case portD
 //			Port_reg=GPIO_PORTD_DIR_R;

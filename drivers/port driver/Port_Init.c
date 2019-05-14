@@ -39,16 +39,6 @@ void Port_Init(uint8 port_index)
         GPIO_PORTB_DEN_R |= 0x000000FF;
     }
 
-    if (port_index == 2)
-    {
-        GPIO_PORTC_LOCK_R = GPIO_LOCK_KEY;
-        GPIO_PORTC_CR_R |= 0x000000FF;
-        GPIO_PORTC_AMSEL_R &= (~0x000000FF);
-        GPIO_PORTC_PCTL_R &= (~0xFFFFFFFF);
-        GPIO_PORTC_AFSEL_R &= (~0x000000FF);
-        GPIO_PORTC_DEN_R |= 0x000000FF;
-    }
-
     if (port_index == 3)
     {
         GPIO_PORTD_LOCK_R = GPIO_LOCK_KEY;

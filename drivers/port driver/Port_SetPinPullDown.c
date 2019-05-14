@@ -30,17 +30,6 @@
           }
 		   break;
 					
-	   case 2:                                                           // portC
-			   if(enable)
-					{
-	           GPIO_PORTC_PDR_R |= pins_mask;
-	        }
-         else
-					{
-             GPIO_PORTC_PDR_R &= (~(pins_mask));
-          }
-		   break;
-	
      	case 3:                                                          // port D
 			    if(enable)
 				   {
