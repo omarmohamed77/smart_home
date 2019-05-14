@@ -9,23 +9,23 @@ void LCD_init()
 }
 void LCD_command(char command)
 {
-	GPIO_PORTA_DATA_R = 0; //command mode(RS = 0), wirte mode (RW = 0), ENABLE = 0
-	GPIO_PORTB_DATA_R = command;
+    GPIO_PORTA_DATA_BITS_R[0xE0] = 0; //command mode(RS = 0), wirte mode (RW = 0), ENABLE = 0
+    GPIO_PORTB_DATA_BITS_R[0xFF] = command;
 	//Latch
-	GPIO_PORTA_DATA_R |= ENABLIE_BIT; // set Enable bit
-	SysTick_Wait(32000);
-	GPIO_PORTA_DATA_R &= (~(ENABLIE_BIT)); // clear Enable bit
-	SysTick_Wait(32000);
+	GPIO_PORTA_DATA_BITS_R[0xE0] |= ENABLIE_BIT; // set Enable bit
+	SysTick_Wait10ms(5);
+	GPIO_PORTA_DATA_BITS_R[0xE0] &= (~(ENABLIE_BIT)); // clear Enable bit
+    SysTick_Wait10ms(5);
 }
 void LCD_data(char data)
 {
-	GPIO_PORTA_DATA_R = RS_BIT; //data mode(RS = 0), wirte mode (RW = 0), ENABLE = 0
-	GPIO_PORTB_DATA_R = data;
+    GPIO_PORTA_DATA_BITS_R[0xE0] = RS_BIT; //data mode(RS = 1), wirte mode (RW = 0), ENABLE = 0
+    GPIO_PORTB_DATA_BITS_R[0xFF] = data;
 	//Latch
-	GPIO_PORTA_DATA_R |= ENABLIE_BIT; // set Enable bit
-	SysTick_Wait(32000);
-	GPIO_PORTA_DATA_R &= (~(ENABLIE_BIT)); // clear Enable bit
-	SysTick_Wait(32000);
+	GPIO_PORTA_DATA_BITS_R[0xE0] |= ENABLIE_BIT; // set Enable bit
+    SysTick_Wait10ms(5);
+    GPIO_PORTA_DATA_BITS_R[0xE0] &= (~(ENABLIE_BIT)); // clear Enable bit
+    SysTick_Wait10ms(5);
 }
 void LCD_print(uint16 number)
 {

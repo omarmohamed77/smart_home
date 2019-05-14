@@ -14,17 +14,17 @@
 #include "mcal.h"
 
 void LCD_init();
-   /**
-   * This method is used to send a command to LCD 1602A
-   * @param command This is the command that will be sent to the LCD
-   * @return void
-   */
+/**
+ * This method is used to send a command to LCD 1602A
+ * @param command This is the command that will be sent to the LCD
+ * @return void
+ */
 void LCD_command(char command);
-   /**
-   * This method is used to send data to LCD 1602A
-   * @param data This is the data in ASCII that will be sent to the LCD
-   * @return void
-   */
+/**
+ * This method is used to send data to LCD 1602A
+ * @param data This is the data in ASCII that will be sent to the LCD
+ * @return void
+ */
 void LCD_data(char data);
 
 void LCD_print(uint16 number);
