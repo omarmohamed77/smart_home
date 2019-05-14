@@ -10,16 +10,16 @@
 int main()
 {
     uint8 temp, indata, pwm = 0;
-    ADC0_Init();
     UART7_init();
     Systick_init();
     Port_Init(1);
     Port_SetPinDirection(1, 0x40, PORT_PIN_IN);
-//    PWM_Init();
+    PWM_Init();
     stepper_init();
 //    Port_Init(5);
 //    Port_SetPinDirection(5, 0x6, PORT_PIN_OUT);
-
+    PWM_Modulation(30);
+    ADC0_Init();
     while (1)
     {
         SysTick_Wait10ms(10);
@@ -41,8 +41,8 @@ int main()
             }
             else if (indata != 'r' && indata != 'l')
             {
-//                pwm = indata * 2;
-//                PWM_Modulation(pwm);
+                pwm = indata * 2;
+                PWM_Modulation(pwm);
             }
 
         }
