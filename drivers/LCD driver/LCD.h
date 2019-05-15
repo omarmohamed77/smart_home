@@ -13,6 +13,8 @@
 
 #include "mcal.h"
 
+void delay(uint32 milliseconds);
+
 void LCD_init();
 /**
  * This method is used to send a command to LCD 1602A

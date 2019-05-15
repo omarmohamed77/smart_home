@@ -19,7 +19,8 @@ int main(void)
 //    GPIO_PORTA_DATA_BITS_R[0xE0] = 0xE0;
 //    GPIO_PORTB_DATA_BITS_R[0xFF] = 0x00;
     LCD_init();
-    LCD_data(0x55);
+//    LCD_print(15);
+    LCD_data('a');
     for (;;)
     {
 

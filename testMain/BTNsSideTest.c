@@ -12,6 +12,35 @@
 #include "timer.h"
 #include "LCD.h"
 
+void wait_n_check()
+{
+    uint8 quit = 0, inD;
+    uint16 pot_reading, prev_pot = 0;
+    while (!quit)
+    {
+        ADC0_Reading(&pot_reading);
+        pot_reading = pot_reading >> 7;
+        if (pot_reading != prev_pot)
+        {
+            UART7_Send(pot_reading);
+            prev_pot = pot_reading;
+        }
+        SysTick_Wait10ms(10);
+        if (Data_Available_To_Be_Received())
+        {
+            inD = (uint8) (UART7_DR_R & Received_Data_Mask);
+            if (inD == 'c')
+            {
+                quit = 1;
+            }
+            else
+            {
+                LCD_print(inD);
+            }
+        }
+    }
+}
+
 int main(void)
 {
     uint8 flag1 = 0, flag2 = 0, led = 0, d1, d2;
@@ -78,15 +107,13 @@ int main(void)
         {
             r = 0;
             UART7_Send('r');
-            while (UART7_Receive() != 'c')
-                ;
+            wait_n_check();
         }
         if (l)
         {
             l = 0;
             UART7_Send('l');
-            while (UART7_Receive() != 'c')
-                ;
+            wait_n_check();
         }
         if (p)
         {

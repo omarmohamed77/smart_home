@@ -11,6 +11,7 @@ volatile int y;
 void ADC0_Init(void) {
     SYSCTL_RCGCADC_R |= 0x1; // Enable clock for ADC0
     SYSCTL_RCGCGPIO_R |= 0x10; // Enable portE
+    SYSCTL_RCGC0_R |= SYSCTL_RCGC0_ADC0;
     y = 0;
     y = 0;
     y = 0;
