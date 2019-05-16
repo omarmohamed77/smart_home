@@ -2,7 +2,6 @@
 #define TIVA_H_
 
 #include "ADC.h"
-#include "UART0.h"
 #include "UART7.h"
 #include "stepper.h"
 #include "PWM.h"
