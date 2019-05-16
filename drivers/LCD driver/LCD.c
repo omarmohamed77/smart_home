@@ -13,7 +13,7 @@ void LCD_init()
 {
     LCD_command(DISPLAY_ON_CURSOR_OFF);
     LCD_command(FUNCTION_SET_8BIT_2LINE);
-//    LCD_command(ENTRY_MODE_LEFT_TO_RIGHT);
+    LCD_command(ENTRY_MODE_LEFT_TO_RIGHT);
     LCD_command(CLEAR);
 }
 void LCD_command(char command)

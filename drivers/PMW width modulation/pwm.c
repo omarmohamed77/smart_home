@@ -22,7 +22,7 @@ void PWM_Init(void) {
     PWM1_ENABLE_R |= (PWM_ENABLE_PWM6EN); // Enable pwm output to M1PWM6
 }
 void PWM_Modulation(int potiometer_reading) {
-    int duty_c = ((2500 * potiometer_reading) / 64);
+    int duty_c = ((5000 * potiometer_reading) / 64);
     PWM1_3_CTL_R &= ~(1 << 0); // disable pwm block until ready to use
     PWM1_3_CTL_R &= ~(1 << 1); // set count-down mode
     PWM1_3_GENA_R |= (0xC2);   // drive pwm low on CmpA and high on zero(low
