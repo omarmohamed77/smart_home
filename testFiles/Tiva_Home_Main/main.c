@@ -23,16 +23,16 @@ int main(void)
         if (avg != preavg)
         {
 			//send
-            UART7_Send(Out_Data);
-            Prev_temp = Out_Data;
-            preavg = avg;
-
+            if((UART7_FR_R & 0x20)==0){
+	            UART7_DR_R = Out_Data;
+				Prev_temp = Out_Data;
+				preavg = avg;
+			}
         }
         //receive
-        if (!(UART7_FR_R & UART_FR_RXFE))
-        {
-
-            In_Data = (uint8) (UART7_DR_R & Received_Data_Mask);
+		if((UART7_FR_R & 0x10)==0)
+		{
+			In_Data  = (UART7_DR_R & 0xFF);
             Stepper_Data = In_Data & Stepper_Read;
             Stepper_Data >>= 6;
             if (Stepper_Data == 0x01)
