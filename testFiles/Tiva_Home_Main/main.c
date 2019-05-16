@@ -2,6 +2,7 @@
 #include "Tiva_Home.h"
 
 #define Stepper_Read		0xC0
+#define PWM_Data			0x3F
 
 void SystemInit(void){
 	UART7_init();
@@ -14,7 +15,7 @@ void SystemInit(void){
 int main(void)
 {
     uint8 Prev_temp = 0, avg, preavg = 0;
-    uint8 In_Data, Stepper_Data, Out_Data;
+    uint8 In_Data, Out_Data, Stepper_Data, Potentiometer_Reading;
     while (1)
     {
         Out_Data = get_temperature();
@@ -33,6 +34,8 @@ int main(void)
 		if((UART7_FR_R & 0x10)==0)
 		{
 			In_Data  = (UART7_DR_R & 0xFF);
+			Potentiometer_Reading = In_Data & PWM_Data;
+			PWM_Modulation(Potentiometer_Reading);
             Stepper_Data = In_Data & Stepper_Read;
             Stepper_Data >>= 6;
             if (Stepper_Data == 0x01)
