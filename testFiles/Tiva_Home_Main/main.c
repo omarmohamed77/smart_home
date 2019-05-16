@@ -3,13 +3,16 @@
 
 #define Stepper_Read		0xC0
 
-int main(void)
-{
-    UART7_init();
+void SystemInit(void){
+	UART7_init();
     ADC0_Init();
     Systick_init();
     stepper_init();
     PWM_Init();
+}
+
+int main(void)
+{
     uint8 Prev_temp = 0, avg, preavg = 0;
     uint8 In_Data, Stepper_Data, Out_Data;
     while (1)
