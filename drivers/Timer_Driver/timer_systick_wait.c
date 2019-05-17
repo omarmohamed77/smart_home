@@ -15,6 +15,12 @@ void SysTick_Wait10ms(uint32 delay)
   uint32 i;
   for(i=0; i<delay; i++)
   {
+<<<<<<< HEAD
     SysTick_Wait(800000); // wait 10ms
   }
 }
+=======
+    SysTick_Wait(160000); // wait 10ms
+  }
+}
+>>>>>>> 2977a9c6aa278a1db4442341094c7a67154cf252
