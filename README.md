@@ -1,5 +1,5 @@
 # Microprocessor-Based-Systems-
-ssmart home project using arm cortex m4  
+smart home project using arm cortex m4  
 <endl>
 In this project we will implement 3 subsystems that can be used in a smart home. We will use two
 TM4C123G Launchpads that will communicate with each other using UART.
